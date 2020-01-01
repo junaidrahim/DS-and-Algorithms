@@ -16,13 +16,35 @@ vector<int> findPair (vector<int> arr, int sum) {
         }
     }
 
-    
+    int max_index = pivot - 1;
+    int min_index = pivot;
+
+    while(min_index != max_index){
+        int s = arr[min_index] + arr[max_index];
+
+        if(s == sum){
+            ans.push_back(arr[min_index]);
+            ans.push_back(arr[max_index]);
+            break;
+        }
+
+        if (s < sum) {
+            min_index = (++min_index) % arr.size();
+                        
+        } else {
+            max_index = (arr.size()-1 + max_index) % arr.size();
+        }
+    }
 
     return ans;
 }
 
 int main(){
 
+    vector<int> a {7,8,9,10,11,12,13,14,4,5,6};
+    vector<int> p = findPair(a, 24);
+
+    cout << p[0] << ' ' << p[1] << endl;
 
     return 0;
 }
